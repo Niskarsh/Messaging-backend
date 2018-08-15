@@ -13,7 +13,7 @@ export const inbox = (req, res) => {
                 let Final_ms = _.filter(messages, message => _.findIndex(user.blocked, message.sender)==-1)
                 res.send(Final_ms)
             }).catch(e => res.status(500).send(e))
-        }).catch ()
+        }).catch (e => res.status(500).send(e))
         
 
     }).catch(e => res.status(500).send(e))
