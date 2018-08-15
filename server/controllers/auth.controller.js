@@ -39,7 +39,7 @@ export const authenticate = (req, res, next) => {
     const authToken = req.header.authorization.split(' ').pop()
     User.verifyAndReturnToken(authToken).then (token => {
         next()
-    }).catch (e => res.status(500).send(e))
+    }).catch (e => res.status(500).send(`Auth error`))
         
 
 }
