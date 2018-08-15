@@ -2,11 +2,12 @@ import jwt from 'jsonwebtoken'
 
 export const hash = async (toBeHashed, expiresIn) => {
     if (!expiresIn) {
-        return await jwt.sign({toBeHashed}, process.env.SECRET)
+        return await jwt.sign(toBeHashed, process.env.SECRET).toString()
+    } else {
+        return await jwt.sign({ data : toBeHashed }, process.env.SECRET, {
+            expiresIn: expiresIn
+        }).toString()
     }
-    console.log (expiresIn)
-    return await jwt.sign({toBeHashed}, process.env.SECRET, {
-        expiresIn: expiresIn
-    })
+
 
 } 
