@@ -5,6 +5,10 @@ let messageSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    senderEID : {
+        type : String,
+        required : true,
+    },
     receiver : {
         type : String,
         required : true

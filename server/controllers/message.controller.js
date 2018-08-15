@@ -3,13 +3,16 @@ import Message from '../models/message.model'
 
 export const sendMessage = (req, res) => {
     const { subject, content, receiverEmail } = req.body
-    const authToken = req.headers.authorization.split(' ').pop()
+    const authToken = req.query.auth
     User.verifyAndReturnToken(authToken).then(token => {
-        const sender = token
-        User.findOne({ emailId: receiverEmail }).then(user => {
-            const receiver = user.token
-            let message = new Message({ sender, receiver, subject, content })
-            message.save().then(data => res.send(data)).catch(e => res.status(500).send(e))
+        
+        User.findOne({ token }).then(user => {
+            const sender = user._id
+            User.findOne({ emailId: receiverEmail }).then(ruser => {
+                const receiver = ruser._id
+                let message = new Message({ sender, senderEID:user.emailId, receiver, subject, content })
+                message.save().then(data => res.send(data)).catch(e => res.status(500).send(e))
+            }).catch(e => res.status(500).send(e))
         }).catch(e => res.status(500).send(e))
 
     }).catch(e => res.status(500).send(e))
