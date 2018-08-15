@@ -3,7 +3,7 @@ import Message from '../models/message.model'
 
 export const sendMessage = (req, res) => {
     const { subject, content, receiverEmail } = req.body
-    const authToken = req.header.authorization.split(' ').pop()
+    const authToken = req.headers.authorization.split(' ').pop()
     User.verifyAndReturnToken(authToken).then(token => {
         const sender = token
         User.findOne({ emailId: receiverEmail }).then(user => {
