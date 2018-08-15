@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import app from './utils/common'
 
 const port =  process.env.PORT || 3001
