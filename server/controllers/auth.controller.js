@@ -34,6 +34,12 @@ export const signup = (req, res) => {
 
 }
 
-export const authenticate = authToken => {
+export const authenticate = (req, res, next) => {
+
+    const authToken = req.header.authorization.split(' ').pop()
+    User.verifyAndReturnToken(authToken).then (token => {
+        next()
+    }).catch (e => res.status(500).send(e))
+        
 
 }
