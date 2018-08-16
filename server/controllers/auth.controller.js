@@ -39,6 +39,6 @@ export const authenticate = (req, res, next) => {
     const authToken = req.query.auth
     User.verifyAndReturnToken(authToken).then (token => {
         next()
-    }).catch (e => res.status(500).send(`Auth error`))
+    }).catch (e => res.status(500).send(e))
 
 }
