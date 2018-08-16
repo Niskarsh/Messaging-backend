@@ -10,3 +10,6 @@ For instance : **```/auth/sendsessage```**.
 
 Routes that do not start with **```/auth```** are public routes
 For instance : **```/login```**
+
+## Session
+Half an hour session is set for each login
